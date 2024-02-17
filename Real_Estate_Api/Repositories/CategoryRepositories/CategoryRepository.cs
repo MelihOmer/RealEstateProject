@@ -12,6 +12,17 @@ namespace Real_Estate_Api.Repositories.CategoryRepositories
         {
             _context = context;
         }
+        public async Task<GetByIdCategoryDto> GetCategoryByIdAsync(int id)
+        {
+            string query = "select * from category where Id=@categoryId";
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@categoryId", id);
+            using(var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryFirstOrDefaultAsync<GetByIdCategoryDto>(query,parameters);
+                return values;
+            }
+        }
         public async Task<List<ResultCategoryDto>> GetAllCategoryAsync()
         {
             string query = "select * from Category";
@@ -34,6 +45,28 @@ namespace Real_Estate_Api.Repositories.CategoryRepositories
             }
         }
 
-        
+        public async Task UpdateCategoryAsync(UpdateCategoryDto updateCategoryDto)
+        {
+            string query = "update category set Name=@categoryName,Status=@categoryStatus where Id=@categoryId";
+            var parameters = new DynamicParameters();
+            parameters.Add("@categoryName", updateCategoryDto.Name);
+            parameters.Add("@categoryStatus", updateCategoryDto.Status);
+            parameters.Add("@categoryId", updateCategoryDto.Id);
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, parameters);
+            }
+        }
+
+        public async Task DeleteCategoryAsync(int id)
+        {
+            string query = "delete from category where Id=@categoryId";
+            var parameters = new DynamicParameters();
+            parameters.Add("@categoryId", id);
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, parameters);
+            }
+        }
     }
 }

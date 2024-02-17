@@ -14,6 +14,12 @@ namespace Real_Estate_Api.Controllers
         {
             _categoryRepository = categoryRepository;
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategory(int id)
+        {
+            var values = await _categoryRepository.GetCategoryByIdAsync(id);
+            return Ok(values);
+        }
         [HttpGet]
         public async Task<IActionResult> CategoryList()
         {
@@ -25,6 +31,18 @@ namespace Real_Estate_Api.Controllers
         {
             await _categoryRepository.CreateCategoryAsync(createCategoryDto);
             return Ok("Kategori Eklendi...");
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            await _categoryRepository.DeleteCategoryAsync(id);
+            return Ok($"{id} Nolu Kategori Silindi...");
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
+        {
+            await _categoryRepository.UpdateCategoryAsync(updateCategoryDto);
+            return Ok($"{updateCategoryDto.Id} Nolu Kategori Güncellendi...");
         }
     }
 }
