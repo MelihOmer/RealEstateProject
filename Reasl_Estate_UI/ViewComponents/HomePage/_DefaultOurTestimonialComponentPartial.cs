@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Reasl_Estate_UI.Dtos.PopularLocationDtos;
+using Reasl_Estate_UI.Dtos.TestimonialDtos;
 
 namespace Reasl_Estate_UI.ViewComponents.HomePage
 {
-    public class _DefaultProductListExploreCitiesComponentPartial :ViewComponent
+    public class _DefaultOurTestimonialComponentPartial : ViewComponent
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public _DefaultProductListExploreCitiesComponentPartial(IHttpClientFactory httpClientFactory)
+        public _DefaultOurTestimonialComponentPartial(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -16,11 +16,11 @@ namespace Reasl_Estate_UI.ViewComponents.HomePage
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:44347/api/PopularLocations");
+            var responseMessage = await client.GetAsync("https://localhost:44347/api/Testimonials");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultPopularLocation>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultTestimonialDto>>(jsonData);
                 return View(values);
             }
             return View();
