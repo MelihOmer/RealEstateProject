@@ -32,7 +32,7 @@ namespace Real_Estate_Api.Controllers
             await _categoryRepository.CreateCategoryAsync(createCategoryDto);
             return Ok("Kategori Eklendi...");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             await _categoryRepository.DeleteCategoryAsync(id);
