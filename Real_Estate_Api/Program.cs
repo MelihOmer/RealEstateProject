@@ -5,6 +5,7 @@ using Real_Estate_Api.Repositories.EmployeeRepositories;
 using Real_Estate_Api.Repositories.PopularLocationRepositories;
 using Real_Estate_Api.Repositories.ProductRepositoires;
 using Real_Estate_Api.Repositories.ServiceRepositories;
+using Real_Estate_Api.Repositories.StatisticRepositories;
 using Real_Estate_Api.Repositories.TestimonialRepositories;
 using Real_Estate_Api.Repositories.WhoWeAreRepositories;
 
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 //Registration
+builder.Services.AddHttpClient();
 
 builder.Services.AddTransient<AppDbContext>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
@@ -23,6 +25,7 @@ builder.Services.AddTransient<IBottomGridRepository,BottomGridRepository>();
 builder.Services.AddTransient<IPopularLocationRepository,PopularLocationRepository>();
 builder.Services.AddTransient<ITestimonialRepository, TestimonialRepository>();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<IStatisticRepository, StatisticRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
