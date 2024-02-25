@@ -20,7 +20,7 @@ namespace Reasl_Estate_UI.ViewComponents.HomePage
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultPopularLocation>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultPopularLocationDto>>(jsonData);
                 return View(values);
             }
             return View();

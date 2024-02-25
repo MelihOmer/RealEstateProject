@@ -25,5 +25,18 @@ namespace Real_Estate_Api.Controllers
             var values = await _productRepository.GetAllProductWithCategoryAsync();
             return Ok(values);
         }
+        [HttpPut("ProductDealOfTheDayChange/{id}")]
+        public async Task<IActionResult> ProductDealOfTheDayChange(int id)
+        {
+             await _productRepository.ProductDealOfTheDayStatusChange(id);
+            return Ok($"{id} Nolu İlan DealOfTheDay Özelliği Değiştirildi.");
+        }
+        [HttpGet("Last5ProductList")]
+        public async Task<IActionResult> Last5ProductList()
+        {
+            var values = await _productRepository.GetLast5ProductAsync();
+            return Ok(values);
+        }
+
     }
 }

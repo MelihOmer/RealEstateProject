@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Real_Estate_Api.Repositories.StatisticRepositories;
 
 namespace Real_Estate_Api.Controllers

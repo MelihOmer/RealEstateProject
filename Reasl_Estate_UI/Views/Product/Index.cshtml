@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Admin/Index.cshtml";
+    int count = 0;
 }
 
 <div class="container-fluid pt-4 px-4">
@@ -23,13 +24,15 @@
                                 <th scope="col">Sil</th>
                                 <th scope="col">Güncelle</th>
                                 <th scope="col">Sitede Gör</th>
+                                <th scope="col">Günün Fırsatı</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
+                                count++;
                                 <tr>
-                                    <th scope="row">@item.id</th>
+                                    <th scope="row">@count</th>
                                     <td>@item.title</td>
                                     <td>@item.city</td>
                                     <td>@item.district</td>
@@ -38,7 +41,11 @@
                                     <td>@item.type</td>
                                     <td><a asp-action="DeleteProduct" asp-controller="Product" asp-route-id="@item.id" class="btn btn-outline-danger">Sil</a></td>
                                     <td><a asp-action="UpdateProduct" asp-controller="Product" asp-route-id="@item.id" class="btn btn-outline-warning">Güncelle</a></td>
-                                    <td><a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.id" class="btn btn-outline-primary">Sitede Gör</a></td>
+                                    <td><a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.id" class="btn btn-outline-primary">Gör</a></td>
+                                    <td>
+                                        <a asp-action="ProductDealOfTheDayChange" asp-controller="Product" asp-route-id="@item.id" class="btn btn-outline-@(item.dealOfTheDay ? "secondary" : "warning")">@(item.dealOfTheDay ? "Pasif Yap" : "Aktif Yap")</a>
+                                    </td>
+                                    
                                 </tr>
                             }
                         </tbody>
