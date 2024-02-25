@@ -8,5 +8,8 @@
         public string City { get; set; }
         public string District { get; set; }
         public int CategoryId { get; set; }
+        public bool DealOfTheDay { get; set; }
+        public DateTime AdvertisementDate { get; set; }
+        public string CategoryName { get; set; }
     }
 }

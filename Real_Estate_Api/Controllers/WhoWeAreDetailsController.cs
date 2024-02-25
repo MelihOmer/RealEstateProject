@@ -32,7 +32,7 @@ namespace Real_Estate_Api.Controllers
             await _whoWeAreRepository.CreateWhoWeAreDetailAsync(createWhoWeAreDetailDto);
             return Ok("Biz Kimiz Alanı Eklendi...");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWhoWeAreDetail(int id)
         {
             await _whoWeAreRepository.DeleteWhoWeAreDetailAsync(id);
