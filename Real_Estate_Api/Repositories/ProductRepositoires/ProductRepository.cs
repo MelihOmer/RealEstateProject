@@ -44,6 +44,18 @@ namespace Real_Estate_Api.Repositories.ProductRepositoires
             }
         }
 
+        public async Task<List<ResultProductAdvertListWithCategoryByEmployeeDto>> GetProductAdvertListByEmployeeAsync(int id)
+        {
+            string query = " select c.Name categoryName,p.* from product p join Category c on c.Id = p.CategoryId where EmployeeId=@empId";
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@empId", id);
+            using (var connection = _appDbContext.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultProductAdvertListWithCategoryByEmployeeDto>(query,parameters);
+                return values.ToList();
+            }
+        }
+
         public async Task<ResultProductDto> GetProductByIdAsync(int id)
         {
             string query = "select * from product where Id=@id";
